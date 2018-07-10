@@ -1,9 +1,19 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.2.50'
-}
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'kotlin'
 
 group 'co.zsmb'
 version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.2.51'
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -19,4 +29,10 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'MainKt'
+    }
 }
